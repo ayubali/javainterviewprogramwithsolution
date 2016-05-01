@@ -7,7 +7,7 @@ New projects should follow the Android Gradle project structure that is defined 
 ## 1.2 File naming
 
 ### 1.2.1 Class files
-Class names are written in [UpperCamelCase](http://en.wikipedia.org/wiki/CamelCase).
+Class names are written in `UpperCamelCase`.
 
 For classes that extend an Android component, the name of the class should end with the name of the component; for example: `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`.
 
@@ -84,6 +84,7 @@ Resource files in the values folder should be __plural__, e.g. `strings.xml`, `s
 ## 2.1 Java language rules
 
 ### 2.1.1 Don't ignore exceptions
+Exceptions are your friend! When the compiler complains you're not catching an exception, don't scowl. Smile: the compiler just made it easier for you to catch runtime problems in your code.
 
 You must never do the following:
 
@@ -95,9 +96,12 @@ void setServerPort(String value) {
 }
 ```
 
-_While you may think that your code will never encounter this error condition or that it is not important to handle it, ignoring exceptions like above creates mines in your code for someone else to trip over some day. You must handle every Exception in your code in some principled way. The specific handling varies depending on the case._ - ([Android code style guidelines](https://source.android.com/source/code-style.html))
+_While you may think that your code will never encounter this error condition or that it is not important to handle it, ignoring exceptions like above creates mines in your code for someone else to trip over some day. You must handle every Exception in your code in some principled way. The specific handling varies depending on the case._ - 
 
-See alternatives [here](https://source.android.com/source/code-style.html#dont-ignore-exceptions).
+Alternatives to catching generic Exception:
+# Catch each exception separately as separate catch blocks after a single try.
+# Refactor your code to have more fine-grained error handling, with multiple try blocks. Split up the IO from the parsing, handle errors separately in each case.
+# Rethrow the exception. Many times you don't need to catch the exception at this level anyway, just let the method throw it.
 
 ### 2.1.2 Don't catch generic exception
 
@@ -251,6 +255,12 @@ _The scope of local variables should be kept to a minimum (Effective Java Item 2
 
 _Local variables should be declared at the point they are first used. Nearly every local variable declaration should contain an initializer. If you don't yet have enough information to initialize a variable sensibly, you should postpone the declaration until you do._ - ([Android code style guidelines](https://source.android.com/source/code-style.html#limit-variable-scope))
 
+Loop variables should be declared in the for statement itself.
+```java
+for (int i = 0; i < n; i++) {
+	doSomething(i);
+}
+```
 ### 2.2.8 Order import statements
 
 If you are using an IDE such as Android Studio, you don't have to worry about this because your IDE is already obeying these rules. If not, have a look below.
@@ -378,7 +388,7 @@ public void loadUserAsync(Context context, int userId, UserCallback callback);
 ### 2.2.12 Javadoc Standard Comments
 o Every file should have a copyright statement at the top, followed by package and import statements and finally the class or interface declaration. In the Javadoc comments, describe what the class or interface does
 
-```
+```java
 /*
  * Copyright (C) 2015 The Android Open Source Project
  *
@@ -412,7 +422,7 @@ public class Foo {
 }
 ```
 o Every class and nontrivial public method you write must contain a Javadoc comment with at least one sentence describing what the class or method does. This sentence should start with a third person descriptive verb.
-```
+```java
  /**
  * Constructs a new String by converting the specified array of
  * bytes using the platform's default character encoding.
@@ -568,6 +578,12 @@ public Observable<Location> syncLocations() {
             });
 }
 ```
+### 2.2.17 Write Short Methods
+
+keep methods small and focused. If a method exceeds 40 lines or so, think about whether it can be broken up without harming the structure of the program.
+
+### 2.2.17 Write Short Methods
+Define fields either at the top of the file or immediately before the methods that use them
 
 ## 2.3 XML style rules
 
@@ -685,6 +701,8 @@ onView(withId(R.id.view))
         .perform(scrollTo())
         .check(matches(isDisplayed()))
 ```
+# Be Consistent
+   BE CONSISTENT. If you're editing code, take a few minutes to look at the surrounding code and determine its style. If that code uses spaces around the if clauses, you should too. If the code comments have little boxes of stars around them, make your comments have little boxes of stars around them too.
 
 # License
 
@@ -703,3 +721,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+
