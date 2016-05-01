@@ -151,7 +151,7 @@ Alternatives to catching generic Exception:
 
 ### 2.1.3 Don't use finalizers
 
-_We don't use finalizers. There are no guarantees as to when a finalizer will be called, or even that it will be called at all.
+_Don't use finalizers. There are no guarantees as to when a finalizer will be called, or even that it will be called at all._
 
 ### 2.1.4 Fully qualify imports
 
@@ -249,7 +249,9 @@ if (condition)
 According to the Android code style guide, the standard practices for some of the predefined annotations in Java are:
 
 * `@Override`: The @Override annotation __must be used__ whenever a method overrides the declaration or implementation from a super-class.
-* `@Deprecated`:The @Override annotation must be used whenever a method overrides the declaration or implementation from a super-class. * `@SuppressWarnings`: The @SuppressWarnings annotation should only be used under circumstances where it is impossible to eliminate a warning. 
+* `@Deprecated`:The @Override annotation must be used whenever a method overrides the declaration or implementation from a super-class.
+
+* `@SuppressWarnings`: The @SuppressWarnings annotation should only be used under circumstances where it is impossible to eliminate a warning. 
 
 #### 2.2.6.2 Annotations style
 
@@ -276,7 +278,7 @@ Annotations applying to fields should be listed __on the same line__, unless the
 
 _The scope of local variables should be kept to a minimum. By doing so, you increase the readability and maintainability of your code and reduce the likelihood of error. Each variable should be declared in the innermost block that encloses all uses of the variable._
 
-_Local variables should be declared at the point they are first used. Nearly every local variable declaration should contain an initializer.
+_Local variables should be declared at the point they are first used. Nearly every local variable declaration should contain an initializer._
 
 Loop variables should be declared in the for statement itself.
 ```java
@@ -723,7 +725,7 @@ onView(withId(R.id.view))
         .check(matches(isDisplayed()))
 ```
 # Be Consistent
-   BE CONSISTENT. If you're editing code, take a few minutes to look at the surrounding code and determine its style. If that code uses spaces around the if clauses, you should too. If the code comments have little boxes of stars around them, make your comments have little boxes of stars around them too.
+   _BE CONSISTENT. If you're editing code, take a few minutes to look at the surrounding code and determine its style. If that code uses spaces around the if clauses, you should too. If the code comments have little boxes of stars around them, make your comments have little boxes of stars around them too._
 
 # License
 
