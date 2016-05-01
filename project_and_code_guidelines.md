@@ -96,11 +96,12 @@ void setServerPort(String value) {
 }
 ```
 Do not do this. Acceptable alternatives (in order of preference) are:
-  - Throw the exception up to the caller of your method.
+  - Throw the exception up to the caller of your method
  ```java
 void setServerPort(String value) throws ConfigurationException {}
 ```
- - Throw a new exception that's appropriate to your level of abstraction.
+
+- Throw a new exception that's appropriate to your level of abstraction
 ```java
 void setServerPort(String value) throws ConfigurationException {
     try {
