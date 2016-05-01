@@ -151,16 +151,13 @@ Alternatives to catching generic Exception:
 
 ### 2.1.3 Don't use finalizers
 
-_We don't use finalizers. There are no guarantees as to when a finalizer will be called, or even that it will be called at all. In most cases, you can do what you need from a finalizer with good exception handling. If you absolutely need it, define a `close()` method (or the like) and document exactly when that method needs to be called. See `InputStream` for an example. In this case it is appropriate but not required to print a short log message from the finalizer, as long as it is not expected to flood the logs._ - ([Android code style guidelines](https://source.android.com/source/code-style.html#dont-use-finalizers))
-
+_We don't use finalizers. There are no guarantees as to when a finalizer will be called, or even that it will be called at all.
 
 ### 2.1.4 Fully qualify imports
 
 This is bad: `import foo.*;`
 
 This is good: `import foo.Bar;`
-
-See more info [here](https://source.android.com/source/code-style.html#fully-qualify-imports)
 
 ## 2.2 Java style rules
 
@@ -251,11 +248,8 @@ if (condition)
 
 According to the Android code style guide, the standard practices for some of the predefined annotations in Java are:
 
-* `@Override`: The @Override annotation __must be used__ whenever a method overrides the declaration or implementation from a super-class. For example, if you use the @inheritdocs Javadoc tag, and derive from a class (not an interface), you must also annotate that the method @Overrides the parent class's method.
-
-* `@SuppressWarnings`: The @SuppressWarnings annotation should only be used under circumstances where it is impossible to eliminate a warning. If a warning passes this "impossible to eliminate" test, the @SuppressWarnings annotation must be used, so as to ensure that all warnings reflect actual problems in the code.
-
-More information about annotation guidelines can be found [here](http://source.android.com/source/code-style.html#use-standard-java-annotations).
+* `@Override`: The @Override annotation __must be used__ whenever a method overrides the declaration or implementation from a super-class.
+* `@Deprecated`:The @Override annotation must be used whenever a method overrides the declaration or implementation from a super-class. * `@SuppressWarnings`: The @SuppressWarnings annotation should only be used under circumstances where it is impossible to eliminate a warning. 
 
 #### 2.2.6.2 Annotations style
 
@@ -280,9 +274,9 @@ Annotations applying to fields should be listed __on the same line__, unless the
 
 ### 2.2.7 Limit variable scope
 
-_The scope of local variables should be kept to a minimum (Effective Java Item 29). By doing so, you increase the readability and maintainability of your code and reduce the likelihood of error. Each variable should be declared in the innermost block that encloses all uses of the variable._
+_The scope of local variables should be kept to a minimum. By doing so, you increase the readability and maintainability of your code and reduce the likelihood of error. Each variable should be declared in the innermost block that encloses all uses of the variable._
 
-_Local variables should be declared at the point they are first used. Nearly every local variable declaration should contain an initializer. If you don't yet have enough information to initialize a variable sensibly, you should postpone the declaration until you do._ - ([Android code style guidelines](https://source.android.com/source/code-style.html#limit-variable-scope))
+_Local variables should be declared at the point they are first used. Nearly every local variable declaration should contain an initializer.
 
 Loop variables should be declared in the for statement itself.
 ```java
@@ -305,8 +299,6 @@ To exactly match the IDE settings, the imports should be:
 
 * Alphabetically ordered within each grouping, with capital letters before lower case letters (e.g. Z before a).
 * There should be a blank line between each major grouping (android, com, junit, net, org, java, javax).
-
-More info [here](https://source.android.com/source/code-style.html#limit-variable-scope)
 
 ### 2.2.9 Logging guidelines
 
@@ -415,7 +407,7 @@ public User loadUser(Context context, int userId);
 public void loadUserAsync(Context context, int userId, UserCallback callback);
 ```
 ### 2.2.12 Javadoc Standard Comments
-o Every file should have a copyright statement at the top, followed by package and import statements and finally the class or interface declaration. In the Javadoc comments, describe what the class or interface does
+- Every file should have a copyright statement at the top, followed by package and import statements and finally the class or interface declaration. In the Javadoc comments, describe what the class or interface does
 
 ```java
 /*
@@ -450,7 +442,7 @@ public class Foo {
     ...
 }
 ```
-o Every class and nontrivial public method you write must contain a Javadoc comment with at least one sentence describing what the class or method does. This sentence should start with a third person descriptive verb.
+- Every class and nontrivial public method you write must contain a Javadoc comment with at least one sentence describing what the class or method does. This sentence should start with a third person descriptive verb.
 ```java
  /**
  * Constructs a new String by converting the specified array of
@@ -717,7 +709,7 @@ Test methods are annotated with `@Test` and should generally start with the name
 
 Precondition and/or expected behaviour may not always be required if the test is clear enough without them.
 
-Sometimes a class may contain a large amount of methods, that at the same time require several tests for each method. In this case, it's recommendable to split up the test class into multiple ones. For example, if the `DataManager` contains a lot of methods we may want to divide it into `DataManagerSignInTest`, `DataManagerLoadUsersTest`, etc. Generally you will be able to see what tests belong together because they have common [test fixtures](https://en.wikipedia.org/wiki/Test_fixture).
+Sometimes a class may contain a large amount of methods, that at the same time require several tests for each method. In this case, it's recommendable to split up the test class into multiple ones. For example, if the `DataManager` contains a lot of methods we may want to divide it into `DataManagerSignInTest`, `DataManagerLoadUsersTest`, etc.
 
 ### 2.4.2 Espresso tests
 
