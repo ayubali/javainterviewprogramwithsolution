@@ -95,14 +95,40 @@ void setServerPort(String value) {
     } catch (NumberFormatException e) { }
 }
 ```
-
-_While you may think that your code will never encounter this error condition or that it is not important to handle it, ignoring exceptions like above creates mines in your code for someone else to trip over some day. You must handle every Exception in your code in some principled way. The specific handling varies depending on the case._ - 
-
-Alternatives to catching generic Exception:
- - Catch each exception separately as separate catch blocks after a single try.
- - Refactor your code to have more fine-grained error handling, with multiple try blocks. Split up the IO from the parsing, handle errors separately in each case.
- - Rethrow the exception. Many times you don't need to catch the exception at this level anyway, just let the method throw it.
-
+Do not do this. Acceptable alternatives (in order of preference) are:
+  - Throw the exception up to the caller of your method.
+ ```java
+void setServerPort(String value) throws ConfigurationException {}
+```
+ - Throw a new exception that's appropriate to your level of abstraction.
+```java
+void setServerPort(String value) throws ConfigurationException {
+    try {
+        serverPort = Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+        throw new ConfigurationException("Port " + value + " is not valid.");
+    }
+}
+```
+ - Handle the error gracefully and substitute an appropriate value in the catch {} block
+```java
+void setServerPort(String value) {
+	    try {
+	        serverPort = Integer.parseInt(value);
+	    } catch (NumberFormatException e) {
+	        serverPort = 80;  // default port for server
+}
+```
+- Catch the Exception and throw a new RuntimeException. This is dangerous, so do it only if you are positive that if this error occurs the appropriate thing to do is crash.
+```java
+void setServerPort(String value) {
+	    try {
+	        serverPort = Integer.parseInt(value);
+	    } catch (NumberFormatException e) {
+	        throw new RuntimeException("port " + value " is invalid, ", e);
+	    }
+	}
+```
 ### 2.1.2 Don't catch generic exception
 
 You should not do this:
@@ -117,8 +143,10 @@ try {
     handleError();                      // with one generic handler!
 }
 ```
-
-See the reason why and some alternatives [here](https://source.android.com/source/code-style.html#dont-catch-generic-exception)
+Alternatives to catching generic Exception:
+ - Catch each exception separately as separate catch blocks after a single try.
+ - Refactor your code to have more fine-grained error handling, with multiple try blocks. Split up the IO from the parsing, handle errors separately in each case.
+ - Rethrow the exception. Many times you don't need to catch the exception at this level anyway, just let the method throw it.
 
 ### 2.1.3 Don't use finalizers
 
