@@ -31,7 +31,7 @@ Naming conventions for drawables:
 | Notification | `notification_`	| `notification_bg.9.png`     |
 | Tabs         | `tab_`            | `tab_pressed.9.png`         |
 
-Naming conventions for icons (taken from [Android iconography guidelines](http://developer.android.com/design/style/iconography.html)):
+Naming conventions for icons
 
 | Asset Type                      | Prefix             | Example                      |
 | --------------------------------| ----------------   | ---------------------------- |
@@ -99,9 +99,9 @@ void setServerPort(String value) {
 _While you may think that your code will never encounter this error condition or that it is not important to handle it, ignoring exceptions like above creates mines in your code for someone else to trip over some day. You must handle every Exception in your code in some principled way. The specific handling varies depending on the case._ - 
 
 Alternatives to catching generic Exception:
-# Catch each exception separately as separate catch blocks after a single try.
-# Refactor your code to have more fine-grained error handling, with multiple try blocks. Split up the IO from the parsing, handle errors separately in each case.
-# Rethrow the exception. Many times you don't need to catch the exception at this level anyway, just let the method throw it.
+ - Catch each exception separately as separate catch blocks after a single try.
+ - Refactor your code to have more fine-grained error handling, with multiple try blocks. Split up the IO from the parsing, handle errors separately in each case.
+ - Rethrow the exception. Many times you don't need to catch the exception at this level anyway, just let the method throw it.
 
 ### 2.1.2 Don't catch generic exception
 
